@@ -48,4 +48,4 @@ The following environment variables allow you to configure your mysql database:
 
 If the ```TTRSS_DB_NAME``` specified does not already exist in the given MySQL container, it will be created automatically upon container startup, along with the necessary permissions for ```TTRSS_DB_USER```.
 
-Visit the web interface on http://YourIP/
+Visit the web interface on http://YourIP/tt-rss/

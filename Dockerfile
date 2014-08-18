@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 # Update system and install programs
 RUN apt-get update -qq
-RUN apt-get install -qq -y curl apache2 php5 libapache2-mod-php5 php5-mcrypt php5-gd php5-curl mysql-client php5-mysql supervisor wget
+RUN apt-get install -qq -y apache2 php5 libapache2-mod-php5 php5-mcrypt php5-gd php5-curl mysql-client php5-mysql supervisor wget
 RUN apt-get autoclean
 RUN apt-get autoremove -qqy --purge
 RUN mkdir -p /var/run/sshd
@@ -28,8 +28,12 @@ RUN chmod -R 777 /var/www/tt-rss/lock
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY config-template.php /var/www/tt-rss/config-template.php
 COPY ttrss-config.sh /usr/sbin/ttrss-config.sh
-#RUN chmod 777 /usr/sbin/ttrss-config.sh 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Apache Config
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
 
 # Create Ubuntu user ttrss:www-data and grant permissions on installation folder
 RUN useradd -G www-data ttrss

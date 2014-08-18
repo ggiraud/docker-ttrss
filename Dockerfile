@@ -35,6 +35,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN useradd -G www-data ttrss
 RUN chown -R www-data:www-data /var/www/tt-rss
 
-EXPOSE 22 80
+EXPOSE 80
 
 CMD ["/usr/bin/supervisord"]
